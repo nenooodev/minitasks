@@ -45,7 +45,7 @@ public class TaskControllerV1 {
         return inMemory.stream()
                 .filter(task -> Objects.equals(task.getId(), id))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
     }
 
     @PostMapping("/tasks")
