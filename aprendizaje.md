@@ -1,28 +1,5 @@
 # Aprendizaje TDD — Mini Tasks
 
-Comandos usados (el `mvnw` del repo no tiene permiso de ejecución):
-
-```bash
-export JAVA_HOME=$HOME/.jdks/temurin-25.0.4.1
-bash mvnw test
-bash mvnw -Dtest=NombreDelTest test
-```
-
-## Preparación
-
-Antes de empezar, `MiniMiniApplicationTests.contextLoads` ya fallaba con
-`Failed to determine a suitable driver class`: el `pom.xml` tenía
-`spring-boot-starter-data-jpa` sin ningún datasource. Como V1 y V2 guardan
-las tareas en memoria, se sustituyó JPA por `spring-boot-starter-webmvc`,
-se añadió `spring-boot-starter-validation` y se dejó
-`spring-boot-starter-webmvc-test` en scope `test`.
-
-También se movió la aplicación a `com.example.minitasks.MiniTasksApplication`
-para que `@WebMvcTest` encuentre la configuración y para que la aplicación
-real escanee los controladores nuevos. Se retiró el prototipo anterior
-`Task`, que usaba `completed`; el modelo definitivo es `SimpleTask` con
-`done`.
-
 ## SimpleTask
 
 - **Test que produjo el rojo:** `SimpleTaskTest.constructor_storesIdTitleAndDone`
