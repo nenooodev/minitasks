@@ -70,4 +70,11 @@ class TaskControllerV1Test {
                 .andExpect(jsonPath("$.title").value(title))
                 .andExpect(jsonPath("$.done").value(false));
     }
+
+    @Test
+    void getById_nonExisting_returns404() throws Exception {
+        mvc.perform(get("/v1/tasks/999999"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.error").value("Task not found"));
+    }
 }
