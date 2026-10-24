@@ -40,6 +40,14 @@ public class TaskControllerV1 {
         return inMemory;
     }
 
+    @GetMapping("/tasks/{id}")
+    public SimpleTask getById(@PathVariable Long id) {
+        return inMemory.stream()
+                .filter(task -> Objects.equals(task.getId(), id))
+                .findFirst()
+                .orElse(null);
+    }
+
     @PostMapping("/tasks")
     @ResponseStatus(HttpStatus.CREATED)
     public SimpleTask create(@RequestBody CreateTaskDTO dto) {
