@@ -118,3 +118,6 @@ BUILD SUCCESS
 
 Tests MVC de V1 (listado y creación) y V2 (201 con `Location`) incluidos
 en la suite, además de los dos casos nuevos de `GET /v1/tasks/{id}`.
+
+## Declaración de IA
+He usado la IA para la redacción de este aprendizaje.md, asi como para añadir algunos tests extra que no aparecian en el repo original, por supuesto consultando aquellos métodos que me resultaban nuevos 
