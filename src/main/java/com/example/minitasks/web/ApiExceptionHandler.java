@@ -1,5 +1,6 @@
 package com.example.minitasks.web;
 
+import com.example.minitasks.exception.TaskNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,11 @@ public class ApiExceptionHandler {
                 .map(fe -> Map.of("field", fe.getField(), "message", fe.getDefaultMessage()))
                 .toList());
         return ResponseEntity.badRequest().body(body);
+    }
+
+    @ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleTaskNotFound(TaskNotFoundException ex) {
+        return ResponseEntity.status(404).body(Map.of("error", ex.getMessage()));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
