@@ -31,4 +31,15 @@ class TaskServiceTest {
 
         assertThat(created.getTitle()).isEqualTo("Repasar Spring Boot");
     }
+
+    @Test
+    void createKeepsInnerSpacesAndDoneFalse() {
+        when(repository.save(any(SimpleTask.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        SimpleTask created = service.create(new CreateTaskDTO("Repasar Spring Boot"));
+
+        assertThat(created.getTitle()).isEqualTo("Repasar Spring Boot");
+        assertThat(created.isDone()).isFalse();
+    }
 }
