@@ -1,6 +1,7 @@
 package com.example.minitasks.service;
 
 import com.example.minitasks.dto.CreateTaskDTO;
+import com.example.minitasks.exception.TaskNotFoundException;
 import com.example.minitasks.model.SimpleTask;
 import com.example.minitasks.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class TaskService {
 
     public SimpleTask getById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     public void delete(Long id) {
