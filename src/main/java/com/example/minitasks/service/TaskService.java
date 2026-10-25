@@ -17,7 +17,7 @@ public class TaskService {
     }
 
     public SimpleTask create(CreateTaskDTO dto) {
-        return repository.save(new SimpleTask(null, dto.title(), false));
+        return repository.save(new SimpleTask(null, dto.title().strip(), false));
     }
 
     public List<SimpleTask> list() {
