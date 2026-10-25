@@ -32,12 +32,12 @@ public class InMemoryTaskRepository implements TaskRepository {
     @Override
     public Optional<SimpleTask> findById(Long id) {
         return tasks.stream()
-                .filter(task -> Objects.equals(task.getId(), id))
+                .filter(task -> task.getId() == id)
                 .findFirst();
     }
 
     @Override
     public void deleteById(Long id) {
-        tasks.removeIf(task -> Objects.equals(task.getId(), id));
+        tasks.removeIf(task -> task.getId() == id);
     }
 }

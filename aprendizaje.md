@@ -86,18 +86,8 @@
   `ApiExceptionHandler` ya traducía esa excepción a 404 con
   `{"error":"Task not found"}`.
 
-## Resultado final
-
-```text
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
-BUILD SUCCESS
-```
-
 Tests MVC de V1 (listado y creación) y V2 (201 con `Location`) incluidos
 en la suite, además de los dos casos nuevos de `GET /v1/tasks/{id}`.
-
-## Declaración de IA
-He usado la IA para la redacción de este aprendizaje.md, asi como para añadir algunos tests extra que no aparecian en el repo original, por supuesto consultando aquellos métodos que me resultaban nuevos 
 
 ## TaskService: normalización del título (sesión 3)
 
@@ -145,13 +135,7 @@ He usado la IA para la redacción de este aprendizaje.md, asi como para añadir 
 - **Repositorio:** `TaskRepository` e `InMemoryTaskRepository` mantienen
   el almacenamiento en memoria y la asignación de ids.
 
-### Resultado final de la sesión 3
 
-```text
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
-BUILD SUCCESS
-```
+## Declaración de IA
+He usado la IA para la redacción de este aprendizaje.md, asi como para añadir algunos tests extra que no aparecian en el repo original, por supuesto consultando aquellos métodos que me resultaban nuevos 
 
-Se mantienen las 16 pruebas anteriores y se añaden las 2 de
-`TaskServiceTest`. La creación normaliza los extremos del título, conserva
-los espacios interiores y guarda `done = false`.
