@@ -98,3 +98,60 @@ en la suite, además de los dos casos nuevos de `GET /v1/tasks/{id}`.
 
 ## Declaración de IA
 He usado la IA para la redacción de este aprendizaje.md, asi como para añadir algunos tests extra que no aparecian en el repo original, por supuesto consultando aquellos métodos que me resultaban nuevos 
+
+## TaskService: normalización del título (sesión 3)
+
+### Rojo
+
+- **Test que produjo el rojo:** `TaskServiceTest.createStripsTitleEdges`.
+- **Commit:** `8d176e6` (`[RED]: TaskService.createStripsTitleEdges`),
+  tag `sesion-3-8d176e6`.
+- **Por qué falló:** el servicio inicial guardaba `dto.title()` sin
+  normalizar:
+
+  ```text
+  expected: "Repasar Spring Boot"
+   but was: "  Repasar Spring Boot  "
+  ```
+
+- **Comando:** `bash mvnw -Dtest=TaskServiceTest#createStripsTitleEdges test`.
+- **Repositorio mock:** `repository.save(...)` devuelve su argumento y el
+  test comprueba el título de la tarea devuelta.
+
+### Verde
+
+- **Commit:** `f5c7972` (`[GREEN]: TaskService.createStripsTitleEdges con strip()`),
+  tag `sesion-3-f5c7972`.
+- **Cambio que lo hizo pasar:** `dto.title().strip()` antes de construir
+  `SimpleTask`, manteniendo `done = false`.
+- **Resultado:** el test objetivo y la suite completa pasaron.
+
+### Refactor
+
+- **Commit:** `fd38260`
+  (`[REFACTOR]: TaskService conserva espacios interiores y done=false`),
+  tag `sesion-3-fd38260`. Añade el caso con `"Repasar Spring Boot"` y
+  comprueba que se conserva el título y que `done` es `false`.
+- **Commit:** `7bedc18`
+  (`[REFACTOR]: TaskControllerV1 delega en TaskService`),
+  tag `sesion-3-7bedc18`. El controlador ya no guarda estado: delega
+  listado, consulta, creación y borrado en el servicio. Las pruebas MVC
+  existentes se conservan con `@Import` del servicio y del repositorio.
+- **Commit:** `52f165f`
+  (`[REFACTOR]: Excepción propia TaskNotFoundException`),
+  tag `sesion-3-52f165f`. El servicio lanza la excepción propia y
+  `ApiExceptionHandler` la traduce a 404 con
+  `{"error":"Task not found"}`.
+- **Repositorio:** `TaskRepository` e `InMemoryTaskRepository` mantienen
+  el almacenamiento en memoria y la asignación de ids.
+
+### Resultado final de la sesión 3
+
+```text
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+Se mantienen las 16 pruebas anteriores y se añaden las 2 de
+`TaskServiceTest`. La creación normaliza los extremos del título, conserva
+los espacios interiores y guarda `done = false`.
